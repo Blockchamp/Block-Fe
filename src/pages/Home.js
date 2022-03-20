@@ -33,6 +33,14 @@ export default function Home() {
     stakingContract.on("Reward", reward);
     stakingContract.on("Transfer", transfer_amount);
     stakingContract.on("Buy", bought);
+    return () => {
+      if (stakingContract) {
+        stakingContract.off("Stake", cl);
+        stakingContract.off("Reward", reward);
+        stakingContract.off("Transfer", transfer_amount);
+        stakingContract.off("Buy", bought);
+      }
+    };
   }, []);
 
   const cl = () => {
