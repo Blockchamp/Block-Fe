@@ -46,6 +46,7 @@ export default function Home() {
   const cl = () => {
     setLoading1(false);
     window.alert("Token staked successfully");
+    getToken();
   };
 
   const reward = (rew, rew2, rew3) => {
@@ -55,16 +56,19 @@ export default function Home() {
     } else {
       window.alert("Congratulations, you have claimed your weekly reward");
     }
+    getToken();
   };
 
   const transfer_amount = () => {
     setLoading2(false);
     window.alert("JToken was transferred successfully");
+    getToken();
   };
 
   const bought = () => {
     setLoading3(false);
     window.alert("JToken was purchased successfully");
+    getToken();
   };
 
   const getToken = async () => {
