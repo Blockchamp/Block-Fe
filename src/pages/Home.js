@@ -4,7 +4,7 @@ import { BigNumber, ethers } from "ethers";
 import abi from "../utils/staking.json";
 
 export default function Home() {
-  const contractAddress = "0xC3b80E3Ce3A053bcD046Bbd17C8526556f7a87EA";
+  const contractAddress = "0xC316300aBE69f0Ef0Ed5F18ab70054C7Efe41096";
   const contractABI = abi.abi;
   const [loading, setLoading] = useState(false);
   const [loading1, setLoading1] = useState("");
@@ -36,9 +36,12 @@ export default function Home() {
     console.log("token staked");
   };
 
-  const reward = () => {
-    getToken();
+  const reward = (rew, rew2, rew3) => {
+    console.log(rew, rew2, rew3);
     console.log("get reward");
+    if (rew3 === false) {
+      window.alert("You are not eligible to get reward yet");
+    }
   };
 
   const transfer_amount = () => {
@@ -218,13 +221,13 @@ export default function Home() {
           <div style={{ marginBottom: "30px" }}>
             <div>Transfer Token</div>
             <input
-              style={{ display: "block", marginBottom: "10px" }}
+              style={{ display: "block", marginBottom: "10px", width: "100%" }}
               type="text"
               ref={addressRef}
               placeholder="Enter your address"
             />
             <input
-              style={{ display: "block", marginBottom: "10px" }}
+              style={{ display: "block", marginBottom: "10px", width: "100%" }}
               type="text"
               ref={amountRef}
               placeholder="Enter Amount"
