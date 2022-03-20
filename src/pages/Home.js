@@ -7,13 +7,17 @@ export default function Home() {
   const contractAddress = "0xC316300aBE69f0Ef0Ed5F18ab70054C7Efe41096";
   const contractABI = abi.abi;
   const [loading, setLoading] = useState(false);
-  const [loading1, setLoading1] = useState("");
+  const [loading1, setLoading1] = useState(false);
+  const [loading3, setLoading3] = useState(false);
   const [loading2, setLoading2] = useState(false);
+  const [loading4, setLoading4] = useState(false);
   const [staked, setStacked] = useState(0);
   const [token, setToken] = useState(0);
   const stakeRef = useRef();
   const addressRef = useRef();
+  const addressRef2 = useRef();
   const amountRef = useRef();
+  const etherAmountRef = useRef();
 
   useEffect(() => {
     getToken();
@@ -28,25 +32,31 @@ export default function Home() {
     stakingContract.on("Stake", cl);
     stakingContract.on("Reward", reward);
     stakingContract.on("Transfer", transfer_amount);
+    stakingContract.on("Buy", bought);
   }, []);
 
   const cl = () => {
-    setLoading1("false");
-    getToken();
-    console.log("token staked");
+    setLoading1(false);
+    window.alert("Token staked successfully");
   };
 
   const reward = (rew, rew2, rew3) => {
-    console.log(rew, rew2, rew3);
-    console.log("get reward");
+    setLoading4(false);
     if (rew3 === false) {
       window.alert("You are not eligible to get reward yet");
+    } else {
+      window.alert("Congratulations, you have claimed your weekly reward");
     }
   };
 
   const transfer_amount = () => {
-    getToken();
-    console.log("token transffered");
+    setLoading2(false);
+    window.alert("JToken was transferred successfully");
+  };
+
+  const bought = () => {
+    setLoading3(false);
+    window.alert("JToken was purchased successfully");
   };
 
   const getToken = async () => {
@@ -84,7 +94,7 @@ export default function Home() {
 
   const stakeToken = async () => {
     try {
-      setLoading1("true");
+      setLoading1(true);
       const { ethereum } = window;
 
       if (ethereum) {
@@ -103,13 +113,52 @@ export default function Home() {
         });
 
         stakeRef.current.value = "";
-        console.log("Mining...", stakeTxn.hash);
 
         getToken();
       } else {
         console.log("Ethereum object doesn't exist!");
       }
     } catch (error) {
+      stakeRef.current.value = "";
+      setLoading1(false);
+      console.log(error);
+    }
+  };
+
+  const buyToken = async () => {
+    try {
+      const { ethereum } = window;
+
+      if (ethereum) {
+        setLoading3(true);
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const stakingContract = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
+
+        const addr = addressRef2.current.value;
+        const etherAmount = etherAmountRef.current.value;
+
+        const BuyTxn = await stakingContract.buyToken(addr, {
+          gasLimit: 300000,
+          value: ethers.utils.parseEther(etherAmount),
+        });
+
+        etherAmountRef.current.value = "";
+        addressRef2.current.value = "";
+        console.log("Mining...", BuyTxn.hash);
+
+        getToken();
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      }
+    } catch (error) {
+      etherAmountRef.current.value = "";
+      addressRef2.current.value = "";
+      setLoading3(false);
       console.log(error);
     }
   };
@@ -119,6 +168,7 @@ export default function Home() {
       const { ethereum } = window;
 
       if (ethereum) {
+        setLoading4(true);
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const stakingContract = new ethers.Contract(
@@ -139,13 +189,13 @@ export default function Home() {
         console.log("Ethereum object doesn't exist!");
       }
     } catch (error) {
+      setLoading4(false);
       console.log(error);
     }
   };
 
   const transfer = async () => {
     try {
-      setLoading1("true");
       const { ethereum } = window;
 
       if (ethereum) {
@@ -178,6 +228,9 @@ export default function Home() {
         console.log("Ethereum object doesn't exist!");
       }
     } catch (error) {
+      amountRef.current.value = "";
+      addressRef.current.value = "";
+      setLoading2(false);
       console.log(error);
     }
   };
@@ -200,23 +253,38 @@ export default function Home() {
           </div>
           <div>
             <div style={{ marginBottom: "30px" }}>
-              <div>Stake Token</div>
+              <div style={{ marginBottom: "10px" }}>Stake Token</div>
               <input
+                style={{ width: "100%", marginBottom: "10px" }}
                 type="text"
                 ref={stakeRef}
                 placeholder="Enter your stake"
               />
+              <div>{loading1 === true ? "Staking in progres....." : ""}</div>
               <button onClick={stakeToken}>Stake Token</button>
             </div>
-
-            {loading1 === "true"
-              ? "loading"
-              : loading1 === "false"
-              ? "Staked successfully"
-              : ""}
           </div>
           <div style={{ marginBottom: "30px" }}>
             Token Balance : {loading === true ? "loading" : token}
+          </div>
+          <div style={{ marginBottom: "30px" }}>
+            <div>Buy JToken</div>
+            <input
+              style={{ display: "block", marginBottom: "10px", width: "100%" }}
+              type="text"
+              ref={etherAmountRef}
+              placeholder="Enter Amount in ether"
+            />
+            <input
+              style={{ display: "block", marginBottom: "10px", width: "100%" }}
+              type="text"
+              ref={addressRef2}
+              placeholder="Enter your address"
+            />
+            <div>
+              {loading3 === true ? "Minting JToken in progres....." : ""}
+            </div>
+            <button onClick={buyToken}>Buy Token</button>
           </div>
           <div style={{ marginBottom: "30px" }}>
             <div>Transfer Token</div>
@@ -232,10 +300,14 @@ export default function Home() {
               ref={amountRef}
               placeholder="Enter Amount"
             />
+            <div>
+              {loading2 === true ? "JToken transfer in progres....." : ""}
+            </div>
             <button onClick={transfer}>Transfer</button>
-            {loading2 === true ? "loading" : ""}
           </div>
-
+          <div>
+            {loading4 === true ? "Reward Claiming in progres....." : ""}
+          </div>
           <button onClick={getReward}>Get Reward</button>
         </div>
       </div>
