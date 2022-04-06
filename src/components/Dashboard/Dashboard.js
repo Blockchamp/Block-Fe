@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './Dashboard.css'
+import Message from "../Alert/Alert";
 
 import {
   Badge,
@@ -17,10 +18,17 @@ const Dashboard = () => {
   //initializing ETH balance
   const [token, setToken] = useState();
   const [balance, setEthBalance] = useState(0);
+
+  const [show, setShow] = useState(false)
+  const [message, setMessage] = useState()
+  const [stat, setStat] = useState()
+
+  //mount react 
+  useEffect(() => {
+    setTimeout(() => setShow(false), 3000)
+  }, [show])
   
-  const displayMessage = () => {
-    
-  }
+
   //handling token amount
   const onTokenChange = (e) => {
       setToken(e.target.value)
@@ -32,10 +40,18 @@ const Dashboard = () => {
 
       e.preventDefault()
       //handle batching function here
+      //dummy messages
+      setShow(true)
+      setMessage("Hello")
+      setStat("danger")
   }
 
   const withdraw = () => {
     //handle ETH withdrawal here
+    //dummy messages
+    setShow(true)
+    setMessage("Success")
+    setStat("success")
   }
   return (
     <>
@@ -146,6 +162,7 @@ const Dashboard = () => {
           </Col>
         </Row>
         <hr></hr>
+        <Message show={show} stat={stat} message={message} />
         <Row>
           <Col className="reward mb-5">
             <Card className="reward-card">
