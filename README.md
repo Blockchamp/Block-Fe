@@ -5,6 +5,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Testing Project locally
 In your git CLI, run these commands:  
 git clone https://github.com/Blockchamp/Block-Fe.git  
+
+In your terminal  
 cd block-fe  
 npm install  
 npm start  
