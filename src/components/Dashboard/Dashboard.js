@@ -16,8 +16,11 @@ import {
 const Dashboard = () => {
   //hold the amount of token to be sent
   //initializing ETH balance
-  const [token, setToken] = useState();
-  const [balance, setEthBalance] = useState(0);
+  const [token, setToken] = useState(0);
+  const [ethBalance, setEthBalance] = useState(0);
+  const [totalReward, setTotalReward] = useState(0);
+  const [customers, setCustomer] = useState(0);
+
 
   const [show, setShow] = useState(false)
   const [message, setMessage] = useState()
@@ -70,7 +73,7 @@ const Dashboard = () => {
                   <Col xs="7">
                     <div className="numbers">
                 
-                      <Card.Title as="h6">1000000 NST</Card.Title>
+                      <Card.Title as="h6">{token} NST</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -95,7 +98,7 @@ const Dashboard = () => {
                   <Col xs="7">
                     <div className="numbers">
                   
-                      <Card.Title as="h6">1050 ETH</Card.Title>
+                      <Card.Title as="h6">{ethBalance} ETH</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -121,7 +124,7 @@ const Dashboard = () => {
                   <Col xs="7">
                     <div className="numbers">
           
-                      <Card.Title as="h6">1500 NST</Card.Title>
+                      <Card.Title as="h6">{totalReward} NST</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -147,7 +150,7 @@ const Dashboard = () => {
                   <Col xs="7">
                     <div className="numbers">
                       
-                      <Card.Title as="h6">10000</Card.Title>
+                      <Card.Title as="h6">{customers}</Card.Title>
                     </div>
                   </Col>
                 </Row>
