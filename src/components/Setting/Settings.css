@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+}
+
+.settings {
+   
+    max-width: 600px;
+    margin: 0 auto;
+
+    border-radius: 9px;
+}
+
+Link {
+    outline: none;
+    text-decoration: none;
+}
+
+
+.account, .preference {
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    color: rgb(92, 89, 89);
+}
+
+
+.account:hover, .preference:hover {
+    cursor: pointer;
+    background-color: rgb(239, 241, 243);
+}
