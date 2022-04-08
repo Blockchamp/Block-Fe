@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+
+.address {
+    max-width: 100px;
+   
+}
+.account {
+    width: 200px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding: 2px 4px;
+    cursor: default;
+}

@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+}
+
+.admin-container {
+    height: 100vh;
+    padding: 0 10px;
+    
+}
+
+.admin-form {
+    max-width: 600px;
+    background-color: #fff;
+    height: 60%;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 15px;
+    box-shadow: 2px 2px 2px 1px rgb(172, 171, 171);
+    border-radius: 8px;
+    position: relative;
+    top: 15%;
+
+}

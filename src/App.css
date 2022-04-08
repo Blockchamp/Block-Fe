@@ -97,21 +97,6 @@ a.normal {
   animation: slide 60s infinite;
 }
 
-@keyframes slide {
-  25% {
-    background-image: url("../public/images/real1.jpg");
-  }
-  50% {
-    background-image: url("../public/images/real2.jpg");
-  }
-  75% {
-    background-image: url("../public/images/real3.jpg");
-  }
-  100% {
-    background-image: url("../public/images/real1.jpg");
-  }
-}
-
 .section1 {
   background-color: #dde3ec;
   padding: 50px;
