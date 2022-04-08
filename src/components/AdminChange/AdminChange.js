@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import './AdminChange.css';
-import NavBar from '../Navbar/Header'
+import { Header } from '../Navbar/Header'
 import Footer from "../Footer/Footer";
 import Message from "../Alert/Alert";
 
@@ -48,7 +48,7 @@ const AdminChange = () => {
     return(
         <div>
             <div className="admin-container bg-light">
-                <NavBar />
+                <Header />
                 <Message show={show} stat={stat} message={message} />
                 <Form className="admin-form">
                     

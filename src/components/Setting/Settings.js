@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './Settings.css';
 import Dashboard from '../Dashboard/Dashboard';
 import Footer from '../Footer/Footer';
-import Header from '../Navbar/Header';
+import {Header} from '../Navbar/Header';
 
 
 const Setting = () => {

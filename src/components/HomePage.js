@@ -1,23 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import { NavbarHomepage } from './Navbar/Header';
 
-function HomePage() {
+function HomePage({connected, connectWallet, disconnectWallet, account, isAdmin}) {
+
     return (
+
         <div>
             {/* Home Nav */}
-            <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" className="navigation-bar w-nav"><img src="/images/Nestcoin-1024x726.jpg" loading="lazy" width="0" sizes="100vw" srcSet="images/Nestcoin-1024x726-p-500.jpeg 500w, images/Nestcoin-1024x726-p-800.jpeg 800w, images/Nestcoin-1024x726.jpg 1024w" alt="" /><img src="images/Nestcoin-1024x726.jpg" loading="lazy" width="120" height="90" srcSet="images/Nestcoin-1024x726-p-500.jpeg 500w, images/Nestcoin-1024x726-p-800.jpeg 800w, images/Nestcoin-1024x726.jpg 1024w" sizes="120px" alt="" className="image-2" />
-                <div className="container w-container">
-                    <Link to="/" className="brand-link w-nav-brand"> <img src="/images/nestcoin-logo-big-N.jpg" width="0" alt="Nestcoin Logo" className="image" /> </Link>
-                    <nav role="navigation" className="navigation-menu w-nav-menu">
-                        <Link to="/" className="navigation-link w-nav-link">Home</Link>
-                        <Link to="/get-tickets" className="navigation-link w-nav-link ">Get Tickets</Link>
-                        <Link to="#" className="button-2 w-button">Connect Wallet</Link>
-                    </nav>
-                    <div className="hamburger-button w-nav-button">
-                        <div className="w-icon-nav-menu"></div>
-                    </div>
-                </div>
-            </div>
+            <NavbarHomepage connected={connected} isAdmin={isAdmin} account ={account} disconnectWallet={disconnectWallet}  connectWallet={connectWallet} />
+            
             <div className="hero-section centered wf-section">
                 <div data-w-id="e464d218-f801-55d1-1f50-7da00b5bfb8f" style={{ opacity: 1 }} className="w-container">
                     <h1 className="hero-heading">NESTCOIN CINEMAS</h1>
