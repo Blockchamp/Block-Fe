@@ -46,7 +46,7 @@
   margin: 0 auto;
 }
 .card-title {
-  height: 90px;
+  height: auto;
   text-align: center;
   display: flex;
   flex-direction: column;

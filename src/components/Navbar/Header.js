@@ -202,6 +202,9 @@ export const NavbarHomepage = () => {
           <Link to="/get-tickets" className="navigation-link w-nav-link ">
             Get Tickets
           </Link>
+          <Link to="/admin" className="navigation-link w-nav-link ">
+            Admin
+          </Link>
           {/*   {
             //expose admin link only user is an admin
             connected ? (

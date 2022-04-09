@@ -1,5 +1,5 @@
 { "abi":
-[
+  [
     {
       "inputs": [
         {
@@ -10,6 +10,19 @@
       ],
       "stateMutability": "nonpayable",
       "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        }
+      ],
+      "name": "AddAdmin",
+      "type": "event"
     },
     {
       "anonymous": false,
@@ -63,6 +76,44 @@
           "internalType": "address",
           "name": "recipient",
           "type": "address"
+        }
+      ],
+      "name": "RemoveAdmin",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address[]",
+          "name": "recipient",
+          "type": "address[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "adminAddresses",
+          "type": "address"
+        }
+      ],
+      "name": "SendManyToken",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
         },
         {
           "indexed": false,
@@ -81,6 +132,19 @@
       "type": "event"
     },
     {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "status",
+          "type": "bool"
+        }
+      ],
+      "name": "Withdraw",
+      "type": "event"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -89,6 +153,25 @@
         }
       ],
       "name": "Payments",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "Rewards",
       "outputs": [
         {
           "internalType": "uint256",
@@ -152,10 +235,49 @@
     },
     {
       "inputs": [],
+      "name": "getCustomersAwarded",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getEthAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTokenAwarded",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "nestedToken",
       "outputs": [
         {
-          "internalType": "contract NestedToken",
+          "internalType": "contract NestToken",
           "name": "",
           "type": "address"
         }
