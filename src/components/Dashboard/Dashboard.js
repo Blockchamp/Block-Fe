@@ -20,8 +20,8 @@ import {
 const Dashboard = () => {
   //hold the amount of token to be sent
   //initializing ETH balance
-  const erc20ContractAddress = "0x5C672245e1046f4c302dec348f10Df09E45e855b";
-  const paymentContractAddress = "0xC8289ddCD0648985BA43d8b043Bf14c124E07B5d";
+  const erc20ContractAddress = "0xD2668EF608D7D865FD16308A2f38fc3d15024Ff0";
+  const paymentContractAddress = "0xCF24d1548b1F85060cbe9DD107A5C626E615B365";
   const erc20contractABI = erc20.abi;
   const paymentcontractABI = payment.abi;
 

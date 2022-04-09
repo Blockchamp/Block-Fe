@@ -2,15 +2,24 @@ import React, { useRef, useState, useEffect } from "react";
 import { NavbarHomepage } from "./Navbar/Header";
 import { ethers } from "ethers";
 import payment from "../utils/payment.json";
+import erc20 from "../utils/erc20.json";
 
 function GetTickets() {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState("");
-  const paymentContractAddress = "0xC8289ddCD0648985BA43d8b043Bf14c124E07B5d";
+
+  const [show1, setShow1] = useState(false);
+  const [message1, setMessage1] = useState("");
+
+  const erc20ContractAddress = "0xD2668EF608D7D865FD16308A2f38fc3d15024Ff0";
+  const paymentContractAddress = "0xCF24d1548b1F85060cbe9DD107A5C626E615B365";
+
   const paymentcontractABI = payment.abi;
+  const erc20contractABI = erc20.abi;
 
   const nameRef = useRef();
   const amountRef = useRef();
+  const amountRef1 = useRef();
 
   useEffect(() => {
     const { ethereum } = window;
@@ -23,13 +32,28 @@ function GetTickets() {
       signer
     );
 
+    const erc20Contract = new ethers.Contract(
+      erc20ContractAddress,
+      erc20contractABI,
+      signer
+    );
+
     const buyTicket = () => {
       setMessage("");
       setShow(false);
+      amountRef.current.value = "";
       window.alert("Ticket bought successfully");
     };
 
+    const sellToken = () => {
+      setMessage1("");
+      setShow1(false);
+      amountRef1.current.value = "";
+      window.alert("Token sold successfully");
+    };
+
     paymentContract.on("BuyTicket", buyTicket);
+    erc20Contract.on("SellToken", sellToken);
 
     return () => {
       if (paymentContract) {
@@ -74,6 +98,46 @@ function GetTickets() {
       nameRef.current.value = "";
       //setLoading3(false);
       setShow(false);
+      console.log(error);
+    }
+  };
+
+  const sellTokens = async (evt) => {
+    setShow1(true);
+    evt.preventDefault();
+    try {
+      const { ethereum } = window;
+
+      if (ethereum) {
+        //setLoading3(true);
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const erc20Contract = new ethers.Contract(
+          erc20ContractAddress,
+          erc20contractABI,
+          signer
+        );
+
+        const etherAmount = amountRef1.current.value;
+
+        const BuyTxn = await erc20Contract.sellTokens(
+          ethers.utils.parseEther(etherAmount),
+          {
+            gasLimit: 300000,
+          }
+        );
+
+        amountRef1.current.value = "";
+        console.log("Mining...", BuyTxn.hash);
+        setMessage1("Transaction in progress");
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      }
+    } catch (error) {
+      amountRef1.current.value = "";
+      setMessage1("");
+      //setLoading3(false);
+      setShow1(false);
       console.log(error);
     }
   };

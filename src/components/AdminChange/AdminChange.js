@@ -12,7 +12,7 @@ const AdminChange = () => {
   const [message, setMessage] = useState();
   const [stat, setStat] = useState();
 
-  const paymentContractAddress = "0xC8289ddCD0648985BA43d8b043Bf14c124E07B5d";
+  const paymentContractAddress = "0xCF24d1548b1F85060cbe9DD107A5C626E615B365";
   const paymentcontractABI = payment.abi;
 
   const addressRef = useRef();
